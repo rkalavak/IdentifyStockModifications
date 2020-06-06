@@ -59,7 +59,11 @@ public class IdentifyStockModifications {
 
 	public static void main(String[] args) throws Exception {
 
+		int count = 1;
+
 		for (Map.Entry<String, String> entries : indicesAndLinks.entrySet()) {
+
+			System.out.println(count);
 
 			boolean isNotMatched = false;
 			Map<String, String> nseStocks = nseStocks(entries);
@@ -90,6 +94,7 @@ public class IdentifyStockModifications {
 			if (isNotMatched) {
 				break;
 			}
+			count++;
 		}
 		System.out.println("Nothing found finally...");
 	}
@@ -174,7 +179,7 @@ public class IdentifyStockModifications {
 				stocks.add(stock);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.exit(0);
 		} finally {
 			try {
 				if (null != resultSet && !resultSet.isClosed())
@@ -184,7 +189,7 @@ public class IdentifyStockModifications {
 				if (null != connection && !connection.isClosed())
 					connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.exit(0);
 			}
 		}
 
