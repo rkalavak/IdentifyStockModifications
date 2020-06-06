@@ -61,9 +61,11 @@ public class IdentifyStockModifications {
 
 		int count = 1;
 
+		System.out.println("\nChecking modifications...");
+
 		for (Map.Entry<String, String> entries : indicesAndLinks.entrySet()) {
 
-			System.out.println(count);
+			System.out.print("\n" + count + "   " + entries.getKey().replace("_", " ").replace("MKT ", ""));
 
 			boolean isNotMatched = false;
 			Map<String, String> nseStocks = nseStocks(entries);
@@ -95,8 +97,9 @@ public class IdentifyStockModifications {
 				break;
 			}
 			count++;
+			System.out.print("   Success...");
 		}
-		System.out.println("Nothing found finally...");
+		System.out.println("\n\nNothing found finally...");
 	}
 
 	private static Map<String, String> nseStocks(Map.Entry<String, String> entries) throws IOException {
