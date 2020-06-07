@@ -100,7 +100,7 @@ public class IdentifyStockModifications {
 			System.out.print("   Success...");
 		}
 		System.out.println("\n\n    No issues found...");
-		System.out.print("\n    Wait till 9:15:35...");
+		System.out.print("\n    Wait till 09:15:35...");
 	}
 
 	private static Map<String, String> nseStocks(Map.Entry<String, String> entries) throws IOException {
