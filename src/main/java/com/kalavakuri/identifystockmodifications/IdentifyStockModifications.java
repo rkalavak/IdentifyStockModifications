@@ -74,7 +74,7 @@ public class IdentifyStockModifications {
 			for (Map.Entry<String, String> entry : nseStocks.entrySet()) {
 
 				if (!moneyControlStocks.containsKey(entry.getKey())) {
-					System.out.println("Missing in NSE   " + entries.getKey() + "   " + entry.getKey());
+					System.out.println("Missing from NSE   " + entries.getKey() + "   " + entry.getKey());
 					isNotMatched = true;
 				}
 			}
