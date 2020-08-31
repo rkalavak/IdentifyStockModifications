@@ -21,9 +21,9 @@ import com.google.gson.Gson;
 
 public class IdentifyStockModifications {
 
-	private static final String MONEY_CONTROL_STOCK_URL = "https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/";
-	private static final Map<String, String> indicesAndLinks = new HashMap<>();
-	private static final String NSE_URL = "https://www.nseindia.com/";
+	private static String MONEY_CONTROL_STOCK_URL = "https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/";
+	private static String NSE_ULR = "https://www.nseindia.com/market-data/live-equity-market?symbol=";
+	private static Map<String, String> indicesAndLinks = new HashMap<>();
 
 	static {
 
@@ -64,18 +64,12 @@ public class IdentifyStockModifications {
 
 		System.out.println("\n    Checking modifications...");
 
-		Response response = Jsoup.connect(NSE_URL).ignoreContentType(true).userAgent(
-				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
-				.timeout(90 * 1000).followRedirects(true).maxBodySize(0).execute();
-
-		String nseappid = response.cookie("nseappid");
-
 		for (Map.Entry<String, String> entries : indicesAndLinks.entrySet()) {
 
 			System.out.print("\n" + "    " + count + "   " + entries.getKey().replace("_", " ").replace("MKT ", ""));
 
 			boolean isNotMatched = false;
-			Map<String, String> nseStocks = nseStocks(entries, nseappid);
+			Map<String, String> nseStocks = nseStocks(entries);
 			Map<String, StockVO> moneyControlStocks = fetchMoneyControlStocks(entries);
 
 			for (Map.Entry<String, String> entry : nseStocks.entrySet()) {
@@ -110,14 +104,13 @@ public class IdentifyStockModifications {
 		System.out.print("\n    Wait till 09:15:35...");
 	}
 
-	private static Map<String, String> nseStocks(Map.Entry<String, String> entries, String nseappid)
-			throws IOException {
+	private static Map<String, String> nseStocks(Map.Entry<String, String> entries) throws IOException {
 
 		List<String> nseStocks = new ArrayList<>();
 
 		Response response = Jsoup.connect(entries.getValue()).ignoreContentType(true).userAgent(
 				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
-				.timeout(90 * 1000).header("Accept", "application/json").cookie("nseappid", nseappid)
+				.timeout(90 * 1000).header("Accept", "application/json").cookies(getcookies(entries))
 				.followRedirects(true).maxBodySize(0).execute();
 
 		Document doc = response.parse();
@@ -133,6 +126,18 @@ public class IdentifyStockModifications {
 
 		}
 		return nseStocks.stream().collect(Collectors.toMap(Function.identity(), Function.identity()));
+	}
+
+	private static Map<String, String> getcookies(Map.Entry<String, String> entries) throws IOException {
+
+		String URL = entries.getValue();
+		String symbol = URL.substring(URL.indexOf("=") + 1, URL.length());
+
+		Response response = Jsoup.connect(NSE_ULR.concat(symbol)).ignoreContentType(true).userAgent(
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
+				.timeout(90 * 1000).followRedirects(true).maxBodySize(0).execute();
+
+		return response.cookies();
 	}
 
 	private static Map<String, StockVO> fetchMoneyControlStocks(Map.Entry<String, String> entries) throws IOException {
