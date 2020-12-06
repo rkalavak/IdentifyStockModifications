@@ -109,7 +109,7 @@ public class IdentifyStockModifications {
 		List<String> nseStocks = new ArrayList<>();
 
 		Response response = Jsoup.connect(entries.getValue()).ignoreContentType(true).userAgent(
-				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
 				.timeout(90 * 1000).header("Accept", "application/json").cookies(getcookies(entries))
 				.followRedirects(true).maxBodySize(0).execute();
 
@@ -134,7 +134,7 @@ public class IdentifyStockModifications {
 		String symbol = URL.substring(URL.indexOf("=") + 1, URL.length());
 
 		Response response = Jsoup.connect(NSE_ULR.concat(symbol)).ignoreContentType(true).userAgent(
-				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
 				.timeout(90 * 1000).followRedirects(true).maxBodySize(0).execute();
 
 		return response.cookies();
@@ -152,7 +152,7 @@ public class IdentifyStockModifications {
 			Response response = Jsoup.connect(MONEY_CONTROL_STOCK_URL + stockVO.getMoneyControlSymbol())
 					.ignoreContentType(true)
 					.userAgent(
-							"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36")
+							"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
 					.timeout(90 * 1000).header("Accept", "application/json").followRedirects(true).maxBodySize(0)
 					.execute();
 
