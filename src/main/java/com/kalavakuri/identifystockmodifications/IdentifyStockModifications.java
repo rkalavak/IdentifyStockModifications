@@ -109,7 +109,7 @@ public class IdentifyStockModifications {
 		List<String> nseStocks = new ArrayList<>();
 
 		Response response = Jsoup.connect(entries.getValue()).ignoreContentType(true).userAgent(
-				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36")
 				.timeout(90 * 1000).header("Accept", "application/json").cookies(getcookies(entries))
 				.followRedirects(true).maxBodySize(0).execute();
 
