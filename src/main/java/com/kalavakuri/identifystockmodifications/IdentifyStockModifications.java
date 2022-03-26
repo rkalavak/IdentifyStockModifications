@@ -56,6 +56,16 @@ public class IdentifyStockModifications {
 				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20REALTY");
 		indicesAndLinks.put("MKT_NIFTY_SERVICES_SECTOR",
 				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20SERVICES%20SECTOR");
+		indicesAndLinks.put("MKT_NIFTY_HEALTHCARE",
+				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20HEALTHCARE%20INDEX");
+		indicesAndLinks.put("MKT_NIFTY_CONSUMER_DURABLES",
+				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20CONSUMER%20DURABLES");
+		indicesAndLinks.put("MKT_NIFTY_OIL_AND_GAS",
+				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20OIL%20%26%20GAS");
+		indicesAndLinks.put("MKT_NIFTY_INDIA_DIGITAL",
+				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20INDIA%20DIGITAL");
+		indicesAndLinks.put("MKT_NIFTY_INDIA_MANUFACTURING",
+				"https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20INDIA%20MANUFACTURING");
 	}
 
 	public static void main(String[] args) throws Exception {
